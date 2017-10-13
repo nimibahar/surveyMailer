@@ -8,6 +8,10 @@ import ReduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 
+//remember to remove those:
+import axios from 'axios';
+window.axios = axios;
+
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
