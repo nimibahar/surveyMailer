@@ -31,7 +31,7 @@ module.exports = app => {
     //   await mailer.send(); //send the mail
     //   await survey.save(); //save the survey
     //   req.user.credits -= 1;
-    //   const user = req.user.save();
+    //   const user = await req.user.save();
     //   res.send(user);
     // } catch (err) {
     //   res.send(422).send(err);
@@ -55,7 +55,7 @@ module.exports = app => {
     }
 
     try {
-      const user = req.user.save();
+      const user = await req.user.save();
     } catch (err) {
       res.send(422).send(err);
     }
