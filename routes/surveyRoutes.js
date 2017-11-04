@@ -49,19 +49,19 @@ module.exports = app => {
     }
 
     try {
-      req.user.credits -= 1;
+      req.user.credits -= 1; //update the credits
     } catch (err) {
       res.send(422).send(err);
     }
 
     try {
-      const user = await req.user.save();
+      const user = await req.user.save(); // save a frech copy of the user instance
     } catch (err) {
       res.send(422).send(err);
     }
 
     try {
-      res.send(user);
+      res.send(user); // send back to the client the newly saved copy of the user
     } catch (err) {
       res.send(422).send(err);
     }

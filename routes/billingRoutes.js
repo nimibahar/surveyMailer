@@ -14,7 +14,7 @@ module.exports = app => {
       .then(charge => charge);
 
     req.user.credits += 5;
-    req.user.save().then(user => res.send(user));
+    req.user.save().then(user => res.send(user)); //saving the new user instance info to the db
   });
 };
 

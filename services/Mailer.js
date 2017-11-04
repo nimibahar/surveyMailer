@@ -20,6 +20,7 @@ class Mailer extends helper.Mail {
     this.addRecipients();
   }
 
+  //our method
   formatAddresses(recipients) {
     return recipients.map(({ email }) => {
       return new helper.Email(email); //transform every email string into a sendgrid email thing
@@ -34,6 +35,7 @@ class Mailer extends helper.Mail {
     this.addTrackingSettings(trackingSettings);
   }
 
+  //our method
   addRecipients() {
     const personalize = new helper.Personalization();
     this.recipients.forEach(recipient => {
