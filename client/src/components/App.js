@@ -8,8 +8,6 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 
-// const NewSurvey = () => <h2>NewSurvey</h2>;
-
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();

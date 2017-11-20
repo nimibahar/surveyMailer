@@ -43,25 +43,25 @@ module.exports = app => {
     }
 
     try {
-      await survey.save(); //save the survey
+      await survey.save(); //save the survey to MongoDB
     } catch (err) {
       res.send(422).send(err);
     }
 
     try {
-      req.user.credits -= 1; //update the credits
+      req.user.credits -= 1; //update the credits in MongoDB
     } catch (err) {
       res.send(422).send(err);
     }
 
     try {
-      const user = await req.user.save(); // save a frech copy of the user instance
+      const user = await req.user.save(); // save a frech copy of the user instance to MongoDB
     } catch (err) {
       res.send(422).send(err);
     }
 
     try {
-      res.send(user); // send back to the client the newly saved copy of the user
+      res.send(user); // send the RESPONSE back to the client the newly saved copy of the user from MongoDB
     } catch (err) {
       res.send(422).send(err);
     }
