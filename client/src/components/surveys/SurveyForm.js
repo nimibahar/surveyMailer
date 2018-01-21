@@ -3,28 +3,29 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
+import validateEmails from '../../utils/validateEmails';
 import { Link } from 'react-router-dom';
-
-const FIELDS = [{ label: 'Survey Title', name: 'title', validationError: 'Please provide a title for your survey' }, { label: 'Subject Line', name: 'subject', validationError: 'Please provide a subject for your survey' }, { label: 'Email body', name: 'body', validationError: 'Please provide a survey question' }, { label: 'Recepient List', name: 'emails', validationError: 'Please provide a list of emails' }];
+import formFields from './formFields';
 
 class SurveyForm extends Component {
   renderFields() {
-    return _.map(FIELDS, ({ label, name }) => {
+    return _.map(formFields, ({ label, name }) => {
       return <Field key={name} component={SurveyField} type="text" label={label} name={name} />;
     });
   }
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
 
-          <button type="submit" className="teal btn-flat white-text right">
-            <i className="material-icons">done</i>
-          </button>
           <Link to="/surveys" className="red btn-flat white-text">
             Cancel
           </Link>
+          <button type="submit" className="teal btn-flat white-text right">
+            Next
+            <i className="material-icons">done</i>
+          </button>
         </form>
       </div>
     );
@@ -34,7 +35,9 @@ class SurveyForm extends Component {
 function validate(values) {
   const errors = {};
 
-  _.each(FIELDS, ({ name, validationError }) => {
+  errors.emails = validateEmails(values.emails || '');
+
+  _.each(formFields, ({ name, validationError }) => {
     if (!values[name]) {
       errors[name] = validationError;
     }
@@ -45,5 +48,6 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'surveyForm'
+  form: 'surveyForm',
+  destroyOnUnmount: false
 })(SurveyForm);
