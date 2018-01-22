@@ -26,6 +26,7 @@ module.exports = app => {
     });
 
     const mailer = new Mailer(survey, surveyTemplate(survey));
+
     //sending the email with sendgrid send() hook
     // try {
     //   await mailer.send(); //send the mail
